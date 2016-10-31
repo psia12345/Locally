@@ -1,0 +1,108 @@
+﻿SCHEMA INFORMATION
+
+
+Users
+
+
+Column name
+	Data type
+	details
+	id
+	integer
+	Not null, primary key
+	email
+	string
+	Not null, indexed, unique
+	password_digest
+	string
+	Not null
+	session_token
+	string
+	Not null, indexed, unique
+	
+
+Events
+Column name
+	Data type
+	details
+	id
+	integer
+	Not null, primary key
+	name
+	string
+	Not null
+	host_id
+	integer
+	Not null
+	description
+	text
+	Not null
+	image_url
+	string
+	
+
+	date
+	date
+	Not null
+	start_time
+	time
+	Not null
+	end_time
+	time
+	Not null
+	
+
+Categories
+
+
+Column name
+	Data type
+	details
+	id
+	integer
+	Not null, primary key
+	name
+	string
+	Not null
+	
+
+Category_Event_Join_Table
+
+
+Column name
+	Data type
+	details
+	id
+	integer
+	Not null, primary key
+	category_id
+	integer
+	Not null
+	event_id
+	integer
+	Not null
+	
+
+
+
+Event_Attendee_Join_Table
+
+
+Column name
+	Data type
+	details
+	id
+	integer
+	Not null, primary key
+	event_id
+	integer
+	Not null
+	attendee_id
+	integer
+	Not null
+	bookmark
+	boolean
+	Not null
+	attending
+	boolean
+	Not null
