@@ -1,0 +1,45 @@
+Phase1: Backend setup and Front End user Authentication (2 days)
+  Objective:
+    - Functioning rails project for user accounts
+    - Front end authentication
+
+Phase2: Event Model, API, and components (2days)
+  Objective:
+    - Events can be created, read, edited, and destroyed through API (CRUD)
+
+Phase3: Attending(1day)
+  Objective:
+  - User can view event and click on "Attend"
+  - Attend events will show up in User's show page
+
+__________________________
+
+Phase4: User Show page (1day)
+  Objective:
+    - Style user show page
+    - Display list of attending events ordered by date
+
+Phase6: Bookmark(1day)
+  Objective:
+    - User can bookmark an event and it show up in User's show page (interested events)
+
+Phase7: Sort by Category/ Event Date (1day)
+  Objective:
+    - Display list of Events matching the category query
+    - Display list of Events based on date range
+
+Phase8: Complex Styling in Events/ User (1day)
+  Objective:
+    - Adjust/ fix styling on all events page
+    - Polish the app
+
+Phase7:Pagination/ infinite scrolling Event Index(1day)
+  Objective:
+    - Add pagination option
+    - Also add infinite scrolling of events
+
+Bonus Features(TBD)
+- Map integration
+- Search Feature
+- Notification reminder for upcoming events
+- Calendar integration

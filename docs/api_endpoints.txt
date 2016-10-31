@@ -1,0 +1,24 @@
+API
+
+HTML API
+  Root
+  GET / - load React web app
+
+JSON API
+  User
+    POST /api/users
+    GET /api/users/:userID
+  Session
+    POST /api/session
+    DELETE /api/session
+    GET /api/session
+  EVENTS
+    GET /api/events
+  Event index
+    Has paginations
+    POST /api/events
+    GET /api/events/:eventID
+    PATCH /api/event/:eventID
+    DELETE /api/event/:eventID
+  CATEGORY
+    GET /api/categories
