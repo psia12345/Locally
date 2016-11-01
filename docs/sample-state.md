@@ -1,3 +1,4 @@
+```js
 {
   currentUser: {
     id: 1,
@@ -6,10 +7,10 @@
   forms: {
     signUp: {errors: []},
     logIn: {errors: []},
-    createEvent: {errors: []}
+    createEvent: {errors: ["body can't be blank"]}
   },
   events: {
-    1:{
+    1: {
       name: "Test Event",
       host_id: 1,
       description: "This is a test",
@@ -34,3 +35,4 @@
     }
   }
 }
+```
