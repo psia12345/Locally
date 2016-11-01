@@ -30966,6 +30966,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _greeting_container = __webpack_require__(349);
+	
+	var _greeting_container2 = _interopRequireDefault(_greeting_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = function App(_ref) {
@@ -30978,11 +30982,69 @@
 	      null,
 	      'MY APP'
 	    ),
+	    _react2.default.createElement(_greeting_container2.default, null),
 	    children
 	  );
 	};
 	
 	exports.default = App;
+
+/***/ },
+/* 349 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _greeting = __webpack_require__(350);
+	
+	var _greeting2 = _interopRequireDefault(_greeting);
+	
+	var _reactRedux = __webpack_require__(286);
+	
+	var _session_actions = __webpack_require__(197);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(_ref) {
+	  var session = _ref.session;
+	  return {
+	    currentUser: session.currentUser
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    logout: function logout() {
+	      return dispatch((0, _session_actions.logout)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_greeting2.default);
+
+/***/ },
+/* 350 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(295);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = Greeting;
 
 /***/ }
 /******/ ]);
