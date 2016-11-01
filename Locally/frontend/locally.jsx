@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Root from './components/root'
 
 import {signup, login, logout, show } from './util/session_api_util';
 import configStore from './store/store';
 
 document.addEventListener("DOMContentLoaded", ()=>{
+  let store = configStore();
   const root = document.getElementById("root");
-  ReactDOM.render(<h1>Locally</h1>, root)
+  ReactDOM.render(<Root store={store} />, root)
 
 
 
