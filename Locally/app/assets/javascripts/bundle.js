@@ -81,10 +81,10 @@
 	  var root = document.getElementById("root");
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	
-	  window.login = _session_api_util.login;
-	  window.logout = _session_api_util.logout;
-	  window.show = _session_api_util.show;
-	  window.signup = _session_api_util.signup;
+	  // window.login = login;
+	  // window.logout = logout;
+	  // window.show = show;
+	  // window.signup = signup;
 	  window.store = (0, _store2.default)();
 	});
 

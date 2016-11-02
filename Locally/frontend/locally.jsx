@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 
 
-  window.login = login;
-  window.logout = logout;
-  window.show = show;
-  window.signup = signup;
+  // window.login = login;
+  // window.logout = logout;
+  // window.show = show;
+  // window.signup = signup;
   window.store = configStore();
 })
