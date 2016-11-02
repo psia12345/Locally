@@ -1,27 +1,27 @@
-import {LOGIN, LOGOUT, SIGNUP, FETCH_USER,
-        receiveCurrentUser,
-        receiveErrors } from '../actions/session_actions';
-import {login, logout, signup, show} from '../util/session_api_util';
+import { receiveCurrentUser,
+         receiveErrors,
+         LOGIN,
+         LOGOUT,
+         SIGNUP } from '../actions/session_actions';
 
-const SessionMiddleware = ({getState, dispatch}) => next => action => {
-  const sucessCallback = user => dispatch(receiveCurrentUser(user));
-  const errorLog = errors => dispatch(receiveErrors(errors.responseJSON));
+// api utils
+import { login, signup, logout } from '../util/session_api_util';
+
+export default ({getState, dispatch}) => next => action => {
+  const successCallback = user => dispatch(receiveCurrentUser(user));
+  const errorCallback = xhr => dispatch(receiveErrors(xhr.responseJSON));
 
   switch(action.type){
     case LOGIN:
-      login(action.user, successCallback, errorLog);
+      login(action.user, successCallback, errorCallback);
       return next(action);
     case LOGOUT:
-      logout(()=> next(action));
+      logout(() => next(action));
       break;
     case SIGNUP:
-      signup(action.user, successCallback, errorLog);
-      return next(action);
-    case FETCH_USER:
-      show(action.id, successCallback, errorLog);
+      signup(action.user, successCallback, errorCallback);
       return next(action);
     default:
       return next(action);
   }
 };
-export default SessionMiddleware;

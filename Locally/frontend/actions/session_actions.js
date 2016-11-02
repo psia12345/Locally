@@ -5,31 +5,31 @@ export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const FETCH_USER = 'FETCH_USER';
 
-export const login = (user) => {
+export const login = (user) => ({
   type: LOGIN,
   user
-};
+});
 
-export const logout = () => {
+export const logout = () => ({
   type: LOGOUT
-};
+});
 
-export const signup = (user) => {
+export const signup = (user) => ({
   type: SIGNUP,
   user
-};
+});
 
-export const receiveCurrentUser = (user) => {
+export const receiveCurrentUser = (user) => ({
   type: receiveCurrentUser,
   user
-};
+});
 
-export const receiveErrors = (errors) => {
+export const receiveErrors = (errors) => ({
   type: RECEIVE_ERRORS,
   errors
-};
+});
 
-export const fetchUser = (id) => {
+export const fetchUser = (id) => ({
   type: FETCH_USER,
   id
-};
+});

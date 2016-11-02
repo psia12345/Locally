@@ -1,9 +1,13 @@
 import React from 'react';
-import GreetingContainer from './greeting/greeting_container'; 
-const App = ({children}) => (
+import { Link } from 'react-router';
+import GreetingContainer from './greeting/greeting_container';
+
+const App = ({ children }) => (
   <div>
-    <h1>MY APP</h1>
-    <GreetingContainer />
+    <header>
+      <Link to="/" className="header-link"><h1>My App</h1></Link>
+      <GreetingContainer />
+    </header>
     {children}
   </div>
 );

@@ -1,36 +1,29 @@
-import { RECEIVE_CURRENT_USER, RECEIVE_ERRORS, LOGOUT } from '../actions/session_actions';
+import { RECEIVE_CURRENT_USER, LOGOUT, RECEIVE_ERRORS } from '../actions/session_actions';
 import merge from 'lodash/merge';
 
-const nullUserState = Object.freeze({
-  session: {
-    currentUser: null,
-    errors: []
-  }
+const _nullUser = Object.freeze({
+  currentUser: null,
+  errors: []
 });
 
-const SessionReducer = (oldState = nullUserState, action) => {
-  Object.freeze(oldState);
-  const copyOldState = merge({}, oldState);
-  switch(action.type){
+const SessionReducer = (state = _nullUser, action) => {
+  Object.freeze(state)
+  switch(action.type) {
     case RECEIVE_CURRENT_USER:
-      copyOldState[currentUser] = action.user;
-      return copyOldState;
-    case RECEIVE_ERRORS:
-      copyOldState[errors] = action.errors;
-      return copyOldState;
+      const currentUser = action.currentUser;
+      return merge({}, _nullUser, {
+        currentUser
+      });
     case LOGOUT:
-      return nullUserState;
+      return merge({}, _nullUser);
+    case RECEIVE_ERRORS:
+      const errors = action.errors;
+      return merge({}, _nullUser, {
+        errors
+      });
     default:
-      return oldState;
+      return state;
   }
-}
+};
 
 export default SessionReducer;
-
-//sample state
-// {
-//   session: {
-//     currentUser: null,
-//     errors: ["invalid credentails"]
-//   }
-// }
