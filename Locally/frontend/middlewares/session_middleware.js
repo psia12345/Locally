@@ -3,8 +3,8 @@ import {LOGIN, LOGOUT, SIGNUP, FETCH_USER,
         receiveErrors } from '../actions/session_actions';
 import {login, logout, signup, show} from '../util/session_api_util';
 
-const SessionMiddleware = ({getState, dispatch}) => next => action => {
-  const sucessCallback = user => dispatch(receiveCurrentUser(user));
+export default ({getState, dispatch}) => next => action => {
+  const successCallback = user => dispatch(receiveCurrentUser(user));
   const errorLog = errors => dispatch(receiveErrors(errors.responseJSON));
 
   switch(action.type){
@@ -24,4 +24,3 @@ const SessionMiddleware = ({getState, dispatch}) => next => action => {
       return next(action);
   }
 };
-export default SessionMiddleware;

@@ -6,9 +6,19 @@ import {signup, login, logout, show } from './util/session_api_util';
 import configStore from './store/store';
 
 document.addEventListener("DOMContentLoaded", ()=>{
-  let store = configStore();
+  let store
+  if (window.currentUser) {
+    const preloadedState = {
+      session: {
+        currentUser: window.currentUser
+      }
+    };
+    store = configStore(preloadedState);
+  } else {
+    store = configStore();
+  }
   const root = document.getElementById("root");
-  ReactDOM.render(<Root store={store} />, root)
+  ReactDOM.render(<Root store={store} />, root);
 
 
 
