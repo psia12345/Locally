@@ -3,13 +3,11 @@ import { receiveCurrentUser,
          LOGIN,
          LOGOUT,
          SIGNUP } from '../actions/session_actions';
-
-// api utils
-import { login, signup, logout } from '../util/session_api_util';
+import { login, logout, signup } from '../util/session_api_util';
 
 export default ({getState, dispatch}) => next => action => {
   const successCallback = user => dispatch(receiveCurrentUser(user));
-  const errorCallback = xhr => dispatch(receiveErrors(xhr.responseJSON));
+  const errorCallback = errors => dispatch(receiveErrors(errors.responseJSON));
 
   switch(action.type){
     case LOGIN:

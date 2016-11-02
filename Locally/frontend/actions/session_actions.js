@@ -5,7 +5,8 @@ export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const FETCH_USER = 'FETCH_USER';
 
-export const login = (user) => ({
+
+export const login = user => ({
   type: LOGIN,
   user
 });
@@ -19,9 +20,9 @@ export const signup = (user) => ({
   user
 });
 
-export const receiveCurrentUser = (user) => ({
-  type: receiveCurrentUser,
-  user
+export const receiveCurrentUser = (currentUser) => ({
+  type: RECEIVE_CURRENT_USER,
+  currentUser
 });
 
 export const receiveErrors = (errors) => ({

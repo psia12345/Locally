@@ -67,14 +67,24 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	document.addEventListener("DOMContentLoaded", function () {
-	  var store = (0, _store2.default)();
+	  var store = void 0;
+	  if (window.currentUser) {
+	    var preloadedState = {
+	      session: {
+	        currentUser: window.currentUser
+	      }
+	    };
+	    store = (0, _store2.default)(preloadedState);
+	  } else {
+	    store = (0, _store2.default)();
+	  }
 	  var root = document.getElementById("root");
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	
-	  window.login = _session_api_util.login;
-	  window.logout = _session_api_util.logout;
-	  window.show = _session_api_util.show;
-	  window.signup = _session_api_util.signup;
+	  // window.login = login;
+	  // window.logout = logout;
+	  // window.show = show;
+	  // window.signup = signup;
 	  window.store = (0, _store2.default)();
 	});
 
@@ -21477,7 +21487,6 @@
 	var Root = function Root(_ref) {
 	  var store = _ref.store;
 	
-	
 	  var _redirectIfLoggedIn = function _redirectIfLoggedIn(nextState, replace) {
 	    var currentUser = store.getState().session.currentUser;
 	    if (currentUser) {
@@ -28056,7 +28065,7 @@
 	
 	var _reactRouter = __webpack_require__(203);
 	
-	var _greeting_container = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./greeting/greeting_container\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _greeting_container = __webpack_require__(257);
 	
 	var _greeting_container2 = _interopRequireDefault(_greeting_container);
 	
@@ -28076,7 +28085,7 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'My App'
+	          'Locally'
 	        )
 	      ),
 	      _react2.default.createElement(_greeting_container2.default, null)
@@ -28088,7 +28097,43 @@
 	exports.default = App;
 
 /***/ },
-/* 257 */,
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _session_actions = __webpack_require__(258);
+	
+	var _greeting = __webpack_require__(259);
+	
+	var _greeting2 = _interopRequireDefault(_greeting);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(_ref) {
+	  var session = _ref.session;
+	  return {
+	    currentUser: session.currentUser
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    logout: function logout() {
+	      return dispatch((0, _session_actions.logout)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_greeting2.default);
+
+/***/ },
 /* 258 */
 /***/ function(module, exports) {
 
@@ -28124,10 +28169,10 @@
 	  };
 	};
 	
-	var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(user) {
+	var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {
 	  return {
-	    type: receiveCurrentUser,
-	    user: user
+	    type: RECEIVE_CURRENT_USER,
+	    currentUser: currentUser
 	  };
 	};
 	
@@ -28146,7 +28191,80 @@
 	};
 
 /***/ },
-/* 259 */,
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(203);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var sessionLinks = function sessionLinks() {
+	  return _react2.default.createElement(
+	    'nav',
+	    { className: 'login-signup' },
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/login', activeClassName: 'current' },
+	          'LOGIN'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/signup', activeClassName: 'current' },
+	          'SIGN UP!'
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	var personalGreeting = function personalGreeting(currentUser, logout) {
+	  return _react2.default.createElement(
+	    'hgroup',
+	    { className: 'header-group' },
+	    _react2.default.createElement(
+	      'h2',
+	      { className: 'header-name' },
+	      'Hi, ',
+	      currentUser.email,
+	      '!'
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { className: 'header-button', onClick: logout },
+	      'LOG OUT'
+	    )
+	  );
+	};
+	
+	var Greeting = function Greeting(_ref) {
+	  var currentUser = _ref.currentUser,
+	      logout = _ref.logout;
+	  return currentUser ? personalGreeting(currentUser, logout) : sessionLinks();
+	};
+	
+	exports.default = Greeting;
+
+/***/ },
 /* 260 */,
 /* 261 */,
 /* 262 */
@@ -28204,13 +28322,13 @@
 	
 	var _redux = __webpack_require__(180);
 	
-	var _root_reducer = __webpack_require__(266);
-	
-	var _root_reducer2 = _interopRequireDefault(_root_reducer);
-	
 	var _root_middleware = __webpack_require__(264);
 	
 	var _root_middleware2 = _interopRequireDefault(_root_middleware);
+	
+	var _root_reducer = __webpack_require__(266);
+	
+	var _root_reducer2 = _interopRequireDefault(_root_reducer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28265,8 +28383,8 @@
 	      var successCallback = function successCallback(user) {
 	        return dispatch((0, _session_actions.receiveCurrentUser)(user));
 	      };
-	      var errorCallback = function errorCallback(xhr) {
-	        return dispatch((0, _session_actions.receiveErrors)(xhr.responseJSON));
+	      var errorCallback = function errorCallback(errors) {
+	        return dispatch((0, _session_actions.receiveErrors)(errors.responseJSON));
 	      };
 	
 	      switch (action.type) {
@@ -28287,8 +28405,6 @@
 	    };
 	  };
 	};
-	
-	// api utils
 
 /***/ },
 /* 266 */
@@ -28330,31 +28446,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _nullUser = Object.freeze({
+	var nullUserState = Object.freeze({
 	  currentUser: null,
 	  errors: []
 	});
 	
 	var SessionReducer = function SessionReducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _nullUser;
+	  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : nullUserState;
 	  var action = arguments[1];
 	
-	  Object.freeze(state);
+	  Object.freeze(oldState);
 	  switch (action.type) {
 	    case _session_actions.RECEIVE_CURRENT_USER:
 	      var currentUser = action.currentUser;
-	      return (0, _merge2.default)({}, _nullUser, {
-	        currentUser: currentUser
-	      });
-	    case _session_actions.LOGOUT:
-	      return (0, _merge2.default)({}, _nullUser);
+	      return (0, _merge2.default)({}, nullUserState, { currentUser: currentUser });
 	    case _session_actions.RECEIVE_ERRORS:
 	      var errors = action.errors;
-	      return (0, _merge2.default)({}, _nullUser, {
-	        errors: errors
-	      });
+	      return (0, _merge2.default)({}, nullUserState, { errors: errors });
+	    case _session_actions.LOGOUT:
+	      return (0, _merge2.default)({}, nullUserState);
 	    default:
-	      return state;
+	      return oldState;
 	  }
 	};
 	
