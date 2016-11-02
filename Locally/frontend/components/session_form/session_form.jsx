@@ -14,24 +14,22 @@ class SessionForm extends React.Component{
   handleSubmit(e){
     e.preventDefault();
     const user = this.state;
-    this.props.processForm(user);
+    if (this.props.action === "Login"){
+      this.props.login(user);
+    } else {
+      this.props.signup(user);
+    }
+    this.props.close();
   }
 
   handleGuest(e){
     e.preventDefault();
     const user = { email: "test@gmail.com", password: "password" };
     this.props.login(user);
+    this.props.close();
   }
 
-  componentDidUpdate(){
-    this.redirectIfLoggedIn();
-  }
 
-  redirectIfLoggedIn(){
-    if (this.props.loggedIn){
-      this.props.router.push("/");
-    }
-  }
   renderErrors(){
     return (
       <ul>
@@ -42,27 +40,24 @@ class SessionForm extends React.Component{
     );
   }
 
-  navLink(){
-    if (this.props.formType === "login") {
-      return <Link to="/signup">Or, sign up.</Link>
-    } else {
-      return (<div>Already have an account? <Link to="/login">log in.</Link></div>)
-    }
-  }
-
   update(field){
     return e => this.setState({
       [field]: e.currentTarget.value
     });
   }
 
+  	// navLink() {
+  	// 	if (this.props.formType === "Login") {
+  	// 		return <Link to="/signup">sign up instead</Link>;
+  	// 	} else {
+  	// 		return <Link to="/login">log in instead</Link>;
+  	// 	}
+  	// }
   render(){
     return(
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
-          {this.props.formType}
-          <br />
-          {this.navLink()}
+          {this.props.action}
           {this.renderErrors()}
           <div className="login-form">
             <input type="text" placeholder="email"

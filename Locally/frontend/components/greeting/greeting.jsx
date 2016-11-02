@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 const sessionLinks = () => (
   <nav className="login-signup">
     <ul>
+      <li><Link to="/" className="header-link"><h1>Locally</h1></Link></li>
       <li><Link to="/login" activeClassName="current">LOGIN</Link></li>
       <li><Link to="/signup" activeClassName="current">SIGN UP!</Link></li>
     </ul>
@@ -13,7 +14,7 @@ const sessionLinks = () => (
 const personalGreeting = (currentUser, logout) => (
   <hgroup className="header-group">
     <h2 className="header-name">Hi, {currentUser.email}!</h2>
-    <button className="header-button" onClick={logout}>LOG OUT</button>
+    <Link to="/logout" activeClassName="current">LOG OUT</Link>
   </hgroup>
 )
 

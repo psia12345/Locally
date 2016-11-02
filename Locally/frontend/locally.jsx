@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root'
-
+import Modal from 'react-modal';
 import {signup, login, logout, show } from './util/session_api_util';
 import configStore from './store/store';
 
 document.addEventListener("DOMContentLoaded", ()=>{
-  let store
+  Modal.setAppElement(document.body);
+  let store;
   if (window.currentUser) {
     const preloadedState = {
       session: {
@@ -26,5 +27,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   // window.logout = logout;
   // window.show = show;
   // window.signup = signup;
-  window.store = configStore();
+  window.store = store;
 })
