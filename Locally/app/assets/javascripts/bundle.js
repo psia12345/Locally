@@ -28210,15 +28210,26 @@
 	    'nav',
 	    { className: 'login-signup' },
 	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: '/login', activeClassName: 'current' },
-	      'LOGIN'
-	    ),
-	    _react2.default.createElement('br', null),
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: '/signup', activeClassName: 'current' },
-	      'SIGN UP!'
+	      'ul',
+	      null,
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/login', activeClassName: 'current' },
+	          'LOGIN'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/signup', activeClassName: 'current' },
+	          'SIGN UP!'
+	        )
+	      )
 	    )
 	  );
 	};
@@ -28288,7 +28299,10 @@
 	    processForm: function processForm(user) {
 	      return dispatch(_processForm(user));
 	    },
-	    formType: formType
+	    formType: formType,
+	    login: function login(user) {
+	      return dispatch((0, _session_actions.login)(user));
+	    }
 	  };
 	};
 	
@@ -28335,6 +28349,7 @@
 	      password: ""
 	    };
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.handleGuest = _this.handleGuest.bind(_this);
 	    return _this;
 	  }
 	
@@ -28344,6 +28359,13 @@
 	      e.preventDefault();
 	      var user = this.state;
 	      this.props.processForm(user);
+	    }
+	  }, {
+	    key: 'handleGuest',
+	    value: function handleGuest(e) {
+	      e.preventDefault();
+	      var user = { email: "test@gmail.com", password: "password" };
+	      this.props.login(user);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -28429,7 +28451,8 @@
 	              onChange: this.update("password"),
 	              className: 'login-input' }),
 	            _react2.default.createElement('br', null),
-	            _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+	            _react2.default.createElement('input', { type: 'submit', value: 'Submit' }),
+	            _react2.default.createElement('input', { type: 'submit', value: 'Guest', onClick: this.handleGuest })
 	          )
 	        )
 	      );

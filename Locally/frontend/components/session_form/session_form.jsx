@@ -9,11 +9,18 @@ class SessionForm extends React.Component{
       password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGuest = this.handleGuest.bind(this);
   }
   handleSubmit(e){
     e.preventDefault();
     const user = this.state;
     this.props.processForm(user);
+  }
+
+  handleGuest(e){
+    e.preventDefault();
+    const user = { email: "test@gmail.com", password: "password" };
+    this.props.login(user);
   }
 
   componentDidUpdate(){
@@ -69,6 +76,7 @@ class SessionForm extends React.Component{
                    className="login-input" />
             <br />
             <input type="submit" value="Submit" />
+            <input type="submit" value="Guest" onClick={this.handleGuest} />
           </div>
         </form>
       </div>
