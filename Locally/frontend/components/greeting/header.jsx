@@ -26,6 +26,7 @@ class Header extends React.Component {
   }
 
   onModalClose(){
+    this.props.clearError();
     this.setState({modalOpen: false})
   }
 

@@ -11,7 +11,7 @@ class SessionForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
   }
-
+  
   componentWillUnmount(){
     this.props.close();
   }
@@ -31,7 +31,6 @@ class SessionForm extends React.Component{
     this.props.login(user);
     this.props.close();
   }
-
 
   renderErrors(){
     return (

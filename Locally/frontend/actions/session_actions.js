@@ -4,7 +4,7 @@ export const SIGNUP = 'SIGNUP';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const FETCH_USER = 'FETCH_USER';
-
+export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const login = user => ({
   type: LOGIN,
@@ -34,3 +34,7 @@ export const fetchUser = (id) => ({
   type: FETCH_USER,
   id
 });
+
+export const clearError = () => ({
+  type: CLEAR_ERROR
+})

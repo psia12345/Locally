@@ -28122,6 +28122,9 @@
 	  return {
 	    logout: function logout() {
 	      return dispatch((0, _session_actions.logout)());
+	    },
+	    clearError: function clearError() {
+	      return dispatch((0, _session_actions.clearError)());
 	    }
 	  };
 	};
@@ -28143,6 +28146,7 @@
 	var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 	var RECEIVE_ERRORS = exports.RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 	var FETCH_USER = exports.FETCH_USER = 'FETCH_USER';
+	var CLEAR_ERROR = exports.CLEAR_ERROR = 'CLEAR_ERROR';
 	
 	var login = exports.login = function login(user) {
 	  return {
@@ -28182,6 +28186,12 @@
 	  return {
 	    type: FETCH_USER,
 	    id: id
+	  };
+	};
+	
+	var clearError = exports.clearError = function clearError() {
+	  return {
+	    type: CLEAR_ERROR
 	  };
 	};
 
@@ -28255,6 +28265,7 @@
 	  }, {
 	    key: 'onModalClose',
 	    value: function onModalClose() {
+	      this.props.clearError();
 	      this.setState({ modalOpen: false });
 	    }
 	  }, {
@@ -30694,6 +30705,9 @@
 	      return (0, _merge2.default)({}, nullUserState, { errors: errors });
 	    case _session_actions.LOGOUT:
 	      return (0, _merge2.default)({}, nullUserState);
+	    case _session_actions.CLEAR_ERROR:
+	      var emptyError = action.errors;
+	      return (0, _merge2.default)({}, nullUserState, { emptyError: emptyError });
 	    default:
 	      return oldState;
 	  }
