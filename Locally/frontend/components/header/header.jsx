@@ -60,7 +60,6 @@ class Header extends React.Component {
               onRequestClose={this.onModalClose}
               style={ModalStyle}>
               <SessionFormContainer close={this.onModalClose} action={this.state.signIn} />
-              <Link onClick={this.onModalClose}>Close</Link>
             </Modal>
           </div>
         )

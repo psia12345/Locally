@@ -8,12 +8,19 @@ module.exports = {
     backgroundColor : 'rgba(255, 255, 255, 0.75)'
   },
   content : {
-    position        : 'fixed',
-    top             : '100px',
-    left            : '150px',
-    right           : '150px',
-    bottom          : '100px',
-    border          : '1px solid #ccc',
-    padding         : '20px'
+    position                   : 'absolute',
+    top                        : '20%',
+    left                       : '40%',
+    right                      : '40%',
+    bottom                     : '30%',
+    border                     : '1px solid #ccc',
+    background                 : '#fff',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px',
+    height                     : '150px'
   }
+
 }

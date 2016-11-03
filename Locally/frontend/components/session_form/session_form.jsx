@@ -11,7 +11,7 @@ class SessionForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
   }
-  
+
   componentWillUnmount(){
     this.props.close();
   }
@@ -52,21 +52,20 @@ class SessionForm extends React.Component{
     return(
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
-          {this.props.action}
+          <h2 className="form-title">{this.props.action}</h2>
           {this.renderErrors()}
           <div className="login-form">
             <input type="text" placeholder="email"
                    value={this.state.email}
                    onChange={this.update("email")}
                    className="login-input"/>
-            <br />
             <input type="password" placeholder="password"
                    value={this.state.password}
                    onChange={this.update("password")}
                    className="login-input" />
-            <br />
-            <input type="submit" value="Submit" />
-            <input type="submit" value="Guest" onClick={this.handleGuest} />
+            <input type="submit" value="Submit" className="button-submit"/>
+            <input type="submit" value="Guest" onClick={this.handleGuest}
+            className="button-guest"/>
           </div>
         </form>
       </div>

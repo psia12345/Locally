@@ -28327,12 +28327,7 @@
 	              isOpen: this.state.modalOpen,
 	              onRequestClose: this.onModalClose,
 	              style: _modal_style2.default },
-	            _react2.default.createElement(_session_form_container2.default, { close: this.onModalClose, action: this.state.signIn }),
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { onClick: this.onModalClose },
-	              'Close'
-	            )
+	            _react2.default.createElement(_session_form_container2.default, { close: this.onModalClose, action: this.state.signIn })
 	          )
 	        );
 	      }
@@ -30372,14 +30367,21 @@
 	    backgroundColor: 'rgba(255, 255, 255, 0.75)'
 	  },
 	  content: {
-	    position: 'fixed',
-	    top: '100px',
-	    left: '150px',
-	    right: '150px',
-	    bottom: '100px',
+	    position: 'absolute',
+	    top: '20%',
+	    left: '40%',
+	    right: '40%',
+	    bottom: '30%',
 	    border: '1px solid #ccc',
-	    padding: '20px'
+	    background: '#fff',
+	    overflow: 'auto',
+	    WebkitOverflowScrolling: 'touch',
+	    borderRadius: '4px',
+	    outline: 'none',
+	    padding: '20px',
+	    height: '150px'
 	  }
+	
 	};
 
 /***/ },
@@ -30528,7 +30530,11 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.handleSubmit, className: 'login-form-box' },
-	          this.props.action,
+	          _react2.default.createElement(
+	            'h2',
+	            { className: 'form-title' },
+	            this.props.action
+	          ),
 	          this.renderErrors(),
 	          _react2.default.createElement(
 	            'div',
@@ -30537,14 +30543,13 @@
 	              value: this.state.email,
 	              onChange: this.update("email"),
 	              className: 'login-input' }),
-	            _react2.default.createElement('br', null),
 	            _react2.default.createElement('input', { type: 'password', placeholder: 'password',
 	              value: this.state.password,
 	              onChange: this.update("password"),
 	              className: 'login-input' }),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement('input', { type: 'submit', value: 'Submit' }),
-	            _react2.default.createElement('input', { type: 'submit', value: 'Guest', onClick: this.handleGuest })
+	            _react2.default.createElement('input', { type: 'submit', value: 'Submit', className: 'button-submit' }),
+	            _react2.default.createElement('input', { type: 'submit', value: 'Guest', onClick: this.handleGuest,
+	              className: 'button-guest' })
 	          )
 	        )
 	      );
