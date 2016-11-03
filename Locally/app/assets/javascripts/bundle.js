@@ -28130,6 +28130,9 @@
 	    },
 	    clearError: function clearError() {
 	      return dispatch((0, _session_actions.clearError)());
+	    },
+	    login: function login(user) {
+	      return dispatch((0, _session_actions.login)(user));
 	    }
 	  };
 	};
@@ -28264,6 +28267,14 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleGuest',
+	    value: function handleGuest(e) {
+	      e.preventDefault();
+	      var user = { email: "test@gmail.com", password: "password" };
+	      this.props.login(user);
+	      this.props.close();
+	    }
+	  }, {
 	    key: 'handleLogout',
 	    value: function handleLogout(e) {
 	      e.preventDefault();
@@ -28280,15 +28291,15 @@
 	    value: function checkLoggedInUser() {
 	      if (this.props.currentUser) {
 	        return _react2.default.createElement(
-	          'header',
-	          null,
+	          'div',
+	          { className: 'right-nav' },
 	          _react2.default.createElement(
-	            'button',
+	            _reactRouter.Link,
 	            { id: 'user' },
 	            this.props.currentUser.email
 	          ),
 	          _react2.default.createElement(
-	            'button',
+	            _reactRouter.Link,
 	            { id: 'logout',
 	              onClick: this.handleLogout },
 	            'Logout'
@@ -28296,19 +28307,19 @@
 	        );
 	      } else {
 	        return _react2.default.createElement(
-	          'header',
-	          null,
+	          'div',
+	          { className: 'right-nav' },
 	          _react2.default.createElement(
-	            'button',
-	            { id: 'login',
-	              onClick: this.handleClick.bind(this, "Login") },
-	            'Login'
-	          ),
-	          _react2.default.createElement(
-	            'button',
+	            _reactRouter.Link,
 	            { id: 'sign-up',
 	              onClick: this.handleClick.bind(this, "Sign Up") },
-	            'Sign Up'
+	            'SIGN UP'
+	          ),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { id: 'login',
+	              onClick: this.handleClick.bind(this, "Login") },
+	            'LOG IN'
 	          ),
 	          _react2.default.createElement(
 	            _reactModal2.default,
@@ -28318,7 +28329,7 @@
 	              style: _modal_style2.default },
 	            _react2.default.createElement(_session_form_container2.default, { close: this.onModalClose, action: this.state.signIn }),
 	            _react2.default.createElement(
-	              'button',
+	              _reactRouter.Link,
 	              { onClick: this.onModalClose },
 	              'Close'
 	            )
@@ -28331,8 +28342,48 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'nav',
-	        null,
-	        this.checkLoggedInUser()
+	        { className: 'navbar' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'logo' },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/' },
+	            'LOCALLY'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'right' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'right-nav' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/events' },
+	              'BROWSE EVENTS'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'right-nav' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { onClick: this.handleGuest.bind(this) },
+	              'GUEST '
+	            )
+	          ),
+	          this.checkLoggedInUser(),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'right-nav' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/events' },
+	              'CREATE EVENT'
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);

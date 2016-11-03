@@ -21,6 +21,13 @@ class Header extends React.Component {
     })
   }
 
+  handleGuest(e){
+    e.preventDefault();
+    const user = { email: "test@gmail.com", password: "password" };
+    this.props.login(user);
+    this.props.close();
+  }
+
   handleLogout(e){
     e.preventDefault();
     this.props.logout();
@@ -34,37 +41,50 @@ class Header extends React.Component {
   checkLoggedInUser(){
     if (this.props.currentUser){
       return(
-        <header>
-          <button id="user">{this.props.currentUser.email}</button>
-          <button id="logout"
-            onClick={this.handleLogout}>Logout</button>
-        </header>
+        <div className="right-nav">
+          <Link id="user">{this.props.currentUser.email}</Link>
+          <Link id="logout"
+            onClick={this.handleLogout}>Logout</Link>
+        </div>
       )
     } else {
         return (
-          <header>
-            <button id="login"
-              onClick={this.handleClick.bind(this, "Login")}>Login</button>
-            <button id="sign-up"
-              onClick={this.handleClick.bind(this, "Sign Up")}>Sign Up</button>
+          <div className="right-nav">
+            <Link id="sign-up"
+              onClick={this.handleClick.bind(this, "Sign Up")}>SIGN UP</Link>
+            <Link id="login"
+              onClick={this.handleClick.bind(this, "Login") }>LOG IN</Link>
 
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.onModalClose}
               style={ModalStyle}>
               <SessionFormContainer close={this.onModalClose} action={this.state.signIn} />
-              <button onClick={this.onModalClose}>Close</button>
+              <Link onClick={this.onModalClose}>Close</Link>
             </Modal>
-          </header>
+          </div>
         )
     }
-
   }
 
   render(){
     return(
-      <nav>
-        {this.checkLoggedInUser()}
+      <nav className="navbar">
+        <div className="logo">
+          <Link to="/">LOCALLY</Link>
+        </div>
+        <div className="right">
+          <div className="right-nav">
+            <Link to="/events">BROWSE EVENTS</Link>
+          </div>
+          <div className="right-nav">
+            <Link onClick={this.handleGuest.bind(this)}>GUEST </Link>
+          </div>
+          {this.checkLoggedInUser()}
+          <div className="right-nav">
+            <Link to="/events">CREATE EVENT</Link>
+          </div>
+        </div>
       </nav>
     )
   }
