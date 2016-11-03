@@ -11,6 +11,10 @@ class SessionForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGuest = this.handleGuest.bind(this);
   }
+
+  componentWillUnmount(){
+    this.props.close();
+  }
   handleSubmit(e){
     e.preventDefault();
     const user = this.state;
@@ -19,7 +23,6 @@ class SessionForm extends React.Component{
     } else {
       this.props.signup(user);
     }
-    this.props.close();
   }
 
   handleGuest(e){
@@ -46,13 +49,6 @@ class SessionForm extends React.Component{
     });
   }
 
-  	// navLink() {
-  	// 	if (this.props.formType === "Login") {
-  	// 		return <Link to="/signup">sign up instead</Link>;
-  	// 	} else {
-  	// 		return <Link to="/login">log in instead</Link>;
-  	// 	}
-  	// }
   render(){
     return(
       <div className="login-form-container">

@@ -8,7 +8,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       modalOpen: false,
-      signIn: false
+      signIn: false,
     };
     this.onModalClose = this.onModalClose.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -28,32 +28,6 @@ class Header extends React.Component {
   onModalClose(){
     this.setState({modalOpen: false})
   }
-  //
-  // loginSignup(){
-  //   let component;
-  //   if (this.state.signIn){
-  //     component = <SessionFormContainer close={this.onModalClose} action="Login" />
-  //   } else {
-  //     component = <SessionFormContainer close={this.onModalClose} action="Sign Up" />
-  //   }
-  //
-  //   return (
-  //     <header>
-  //       <button id="login"
-  //         onClick={this.handleClick.bind(this, true)}>Login</button>
-  //       <button id="sign-up"
-  //         onClick={this.handleClick.bind(this, false)}>Sign Up</button>
-  //
-  //       <Modal
-  //         isOpen={this.state.modalOpen}
-  //         onRequestClose={this.onModalClose}
-  //         style={ModalStyle}>
-  //         {component}
-  //         <button onClick={this.onModalClose}>Close</button>
-  //       </Modal>
-  //     </header>
-  //   )
-  // }
 
   checkLoggedInUser(){
     if (this.props.currentUser){

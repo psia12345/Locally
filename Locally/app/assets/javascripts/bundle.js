@@ -76,7 +76,8 @@
 	  if (window.currentUser) {
 	    var preloadedState = {
 	      session: {
-	        currentUser: window.currentUser
+	        currentUser: window.currentUser,
+	        errors: []
 	      }
 	    };
 	    store = (0, _store2.default)(preloadedState);
@@ -28112,7 +28113,8 @@
 	var mapStateToProps = function mapStateToProps(_ref) {
 	  var session = _ref.session;
 	  return {
-	    currentUser: session.currentUser
+	    currentUser: session.currentUser,
+	    errors: session.errors
 	  };
 	};
 	
@@ -28255,33 +28257,6 @@
 	    value: function onModalClose() {
 	      this.setState({ modalOpen: false });
 	    }
-	    //
-	    // loginSignup(){
-	    //   let component;
-	    //   if (this.state.signIn){
-	    //     component = <SessionFormContainer close={this.onModalClose} action="Login" />
-	    //   } else {
-	    //     component = <SessionFormContainer close={this.onModalClose} action="Sign Up" />
-	    //   }
-	    //
-	    //   return (
-	    //     <header>
-	    //       <button id="login"
-	    //         onClick={this.handleClick.bind(this, true)}>Login</button>
-	    //       <button id="sign-up"
-	    //         onClick={this.handleClick.bind(this, false)}>Sign Up</button>
-	    //
-	    //       <Modal
-	    //         isOpen={this.state.modalOpen}
-	    //         onRequestClose={this.onModalClose}
-	    //         style={ModalStyle}>
-	    //         {component}
-	    //         <button onClick={this.onModalClose}>Close</button>
-	    //       </Modal>
-	    //     </header>
-	    //   )
-	    // }
-	
 	  }, {
 	    key: 'checkLoggedInUser',
 	    value: function checkLoggedInUser() {
@@ -30435,6 +30410,11 @@
 	  }
 	
 	  _createClass(SessionForm, [{
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.props.close();
+	    }
+	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
@@ -30444,7 +30424,6 @@
 	      } else {
 	        this.props.signup(user);
 	      }
-	      this.props.close();
 	    }
 	  }, {
 	    key: 'handleGuest',
@@ -30478,15 +30457,6 @@
 	        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
 	      };
 	    }
-	
-	    // navLink() {
-	    // 	if (this.props.formType === "Login") {
-	    // 		return <Link to="/signup">sign up instead</Link>;
-	    // 	} else {
-	    // 		return <Link to="/login">log in instead</Link>;
-	    // 	}
-	    // }
-	
 	  }, {
 	    key: 'render',
 	    value: function render() {
