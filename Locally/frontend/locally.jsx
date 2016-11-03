@@ -4,6 +4,7 @@ import Root from './components/root'
 import Modal from 'react-modal';
 import {signup, login, logout, show } from './util/session_api_util';
 import configStore from './store/store';
+import merge from 'lodash/merge';
 
 document.addEventListener("DOMContentLoaded", ()=>{
   Modal.setAppElement(document.body);
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   ReactDOM.render(<Root store={store} />, root);
 
 
-
+  window.merge = merge;
   // window.login = login;
   // window.logout = logout;
   // window.show = show;

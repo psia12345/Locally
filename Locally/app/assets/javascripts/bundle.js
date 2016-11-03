@@ -68,6 +68,10 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
+	var _merge = __webpack_require__(289);
+	
+	var _merge2 = _interopRequireDefault(_merge);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	document.addEventListener("DOMContentLoaded", function () {
@@ -87,6 +91,7 @@
 	  var root = document.getElementById("root");
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	
+	  window.merge = _merge2.default;
 	  // window.login = login;
 	  // window.logout = logout;
 	  // window.show = show;
@@ -28223,6 +28228,8 @@
 	
 	var _session_form_container2 = _interopRequireDefault(_session_form_container);
 	
+	var _reactRouter = __webpack_require__(203);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28241,7 +28248,7 @@
 	
 	    _this.state = {
 	      modalOpen: false,
-	      signIn: false
+	      signIn: ""
 	    };
 	    _this.onModalClose = _this.onModalClose.bind(_this);
 	    _this.handleLogout = _this.handleLogout.bind(_this);
@@ -28250,10 +28257,10 @@
 	
 	  _createClass(Header, [{
 	    key: 'handleClick',
-	    value: function handleClick(bool) {
+	    value: function handleClick(string) {
 	      this.setState({
 	        modalOpen: true,
-	        signIn: bool
+	        signIn: string
 	      });
 	    }
 	  }, {
@@ -28288,26 +28295,19 @@
 	          )
 	        );
 	      } else {
-	        var component = void 0;
-	        if (this.state.signIn) {
-	          component = _react2.default.createElement(_session_form_container2.default, { close: this.onModalClose, action: 'Login' });
-	        } else {
-	          component = _react2.default.createElement(_session_form_container2.default, { close: this.onModalClose, action: 'Sign Up' });
-	        }
-	
 	        return _react2.default.createElement(
 	          'header',
 	          null,
 	          _react2.default.createElement(
 	            'button',
 	            { id: 'login',
-	              onClick: this.handleClick.bind(this, true) },
+	              onClick: this.handleClick.bind(this, "Login") },
 	            'Login'
 	          ),
 	          _react2.default.createElement(
 	            'button',
 	            { id: 'sign-up',
-	              onClick: this.handleClick.bind(this, false) },
+	              onClick: this.handleClick.bind(this, "Sign Up") },
 	            'Sign Up'
 	          ),
 	          _react2.default.createElement(
@@ -28316,7 +28316,7 @@
 	              isOpen: this.state.modalOpen,
 	              onRequestClose: this.onModalClose,
 	              style: _modal_style2.default },
-	            component,
+	            _react2.default.createElement(_session_form_container2.default, { close: this.onModalClose, action: this.state.signIn }),
 	            _react2.default.createElement(
 	              'button',
 	              { onClick: this.onModalClose },
@@ -30706,8 +30706,9 @@
 	    case _session_actions.LOGOUT:
 	      return (0, _merge2.default)({}, nullUserState);
 	    case _session_actions.CLEAR_ERROR:
-	      var emptyError = action.errors;
-	      return (0, _merge2.default)({}, nullUserState, { emptyError: emptyError });
+	      var newState = (0, _merge2.default)({}, oldState);
+	      newState.errors = [];
+	      return newState;
 	    default:
 	      return oldState;
 	  }

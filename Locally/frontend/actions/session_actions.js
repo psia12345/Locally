@@ -36,5 +36,5 @@ export const fetchUser = (id) => ({
 });
 
 export const clearError = () => ({
-  type: CLEAR_ERROR
-})
+  type: CLEAR_ERROR,
+});

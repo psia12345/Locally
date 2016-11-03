@@ -2,21 +2,22 @@ import React from 'react';
 import Modal from 'react-modal';
 import ModalStyle from './modal_style';
 import SessionFormContainer from '../session_form/session_form_container';
+import {Link} from 'react-router'
 
 class Header extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       modalOpen: false,
-      signIn: false,
+      signIn: ""
     };
     this.onModalClose = this.onModalClose.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
-  handleClick(bool){
+  handleClick(string){
     this.setState({
       modalOpen: true,
-      signIn: bool
+      signIn: string
     })
   }
 
@@ -40,25 +41,18 @@ class Header extends React.Component {
         </header>
       )
     } else {
-        let component;
-        if (this.state.signIn){
-          component = <SessionFormContainer close={this.onModalClose} action="Login" />
-        } else {
-          component = <SessionFormContainer close={this.onModalClose} action="Sign Up" />
-        }
-
         return (
           <header>
             <button id="login"
-              onClick={this.handleClick.bind(this, true)}>Login</button>
+              onClick={this.handleClick.bind(this, "Login")}>Login</button>
             <button id="sign-up"
-              onClick={this.handleClick.bind(this, false)}>Sign Up</button>
+              onClick={this.handleClick.bind(this, "Sign Up")}>Sign Up</button>
 
             <Modal
               isOpen={this.state.modalOpen}
               onRequestClose={this.onModalClose}
               style={ModalStyle}>
-              {component}
+              <SessionFormContainer close={this.onModalClose} action={this.state.signIn} />
               <button onClick={this.onModalClose}>Close</button>
             </Modal>
           </header>

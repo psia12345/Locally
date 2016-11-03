@@ -21,8 +21,9 @@ const SessionReducer = (oldState = nullUserState, action) => {
     case LOGOUT:
       return merge({}, nullUserState);
     case CLEAR_ERROR:
-      let emptyError = action.errors;
-      return merge({}, nullUserState, {emptyError});
+      const newState = merge({}, oldState);
+      newState.errors = [];
+      return newState;
     default:
       return oldState;
   }
